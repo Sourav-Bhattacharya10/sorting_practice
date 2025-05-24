@@ -1,5 +1,12 @@
+use crate::util::is_sorted;
+
 pub fn merge_sort(num_array: Vec<u8>) -> Vec<u8> {
     if num_array.len() <= 1 {
+        return num_array;
+    }
+
+    // Check if the array is already sorted
+    if is_sorted(&num_array) {
         return num_array;
     }
 
@@ -15,7 +22,7 @@ fn merge(left_array: Vec<u8>, right_array: Vec<u8>) -> Vec<u8> {
     let mut i: usize = 0;
     let mut j: usize = 0;
 
-    while i < left_array.len() || j < right_array.len() {
+    while i < left_array.len() && j < right_array.len() {
         if left_array[i] < right_array[j] {
             result.push(left_array[i]);
             i += 1;
@@ -24,6 +31,9 @@ fn merge(left_array: Vec<u8>, right_array: Vec<u8>) -> Vec<u8> {
             j += 1;
         }
     }
+
+    result.extend_from_slice(&left_array[i..]);
+    result.extend_from_slice(&right_array[j..]);
 
     result
 }

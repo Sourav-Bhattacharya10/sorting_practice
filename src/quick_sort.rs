@@ -1,5 +1,12 @@
+use crate::util::is_sorted;
+
 pub fn quick_sort(num_array: Vec<u8>) -> Vec<u8> {
     if num_array.len() <= 1 {
+        return num_array;
+    }
+
+    // Check if the array is already sorted
+    if is_sorted(&num_array) {
         return num_array;
     }
 
